@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power BI 快捷鍵速查表</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --pbi-yellow: #F2C811;
+            --pbi-black: #333333;
+        }
+        body { background-color: #f4f4f9; font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; }
+        .hero-section { background: var(--pbi-black); color: white; padding: 40px 0; margin-bottom: 30px; border-bottom: 5px solid var(--pbi-yellow); }
+        .search-container { max-width: 600px; margin: -30px auto 30px; }
+        .search-input { border-radius: 30px; padding: 15px 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; }
+        .category-badge { cursor: pointer; transition: 0.3s; margin-right: 5px; margin-bottom: 10px; }
+        .shortcut-card { background: white; border-radius: 10px; border: none; transition: 0.3s; height: 100%; }
+        .shortcut-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+        .key-combo { background: #eee; border-radius: 5px; padding: 2px 8px; font-family: monospace; font-weight: bold; color: #d63384; border-bottom: 2px solid #ccc; }
+        .category-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="fw-bold"><i class="bi bi-lightning-charge-fill text-warning"></i> Power BI Shortcuts</h1>
+        <p class="opacity-75">提升你的資料建模與視覺化效率</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- 搜尋欄 -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="form-control search-input" placeholder="搜尋快捷鍵功能或按鍵 (例如: DAX, 刪除, Ctrl)...">
+    </div>
+
+    <!-- 分類篩選 -->
+    <div class="text-center mb-4" id="filterGroup">
+        <span class="badge rounded-pill bg-dark category-badge p-2 px-3" data-filter="all">全部</span>
+        <span class="badge rounded-pill bg-secondary category-badge p-2 px-3" data-filter="畫布與圖表物件操作">畫布與圖表</span>
+        <span class="badge rounded-pill bg-secondary category-badge p-2 px-3" data-filter="DAX 公式編輯器">DAX 編輯器</span>
+        <span class="badge rounded-pill bg-secondary category-badge p-2 px-3" data-filter="視窗與面板導覽">視窗導覽</span>
+        <span class="badge rounded-pill bg-secondary category-badge p-2 px-3" data-filter="Power Query 編輯器">Power Query</span>
+    </div>
+
+    <!-- 列表區域 -->
+    <div class="row g-3" id="shortcutGrid">
+        <!-- 由 JavaScript 自動填入 -->
+    </div>
+
+    <footer class="text-center my-5 text-muted">
+        <hr>
+        <p>Power BI 快捷鍵工具助手 &copy; 2024</p>
+    </footer>
+</div>
+
+<script>
+    const shortcuts = [
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Shift + ?", desc: "呼叫內建快捷鍵面板" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Tab / Shift + Tab", desc: "在圖表與元件之間順向 / 逆向切換焦點" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Ctrl + A", desc: "全選畫布上的所有視覺圖表" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Ctrl + G", desc: "將選取的圖表群組化 (Group)" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Ctrl + Shift + G", desc: "解除選取圖表的群組化 (Ungroup)" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "方向鍵", desc: "將選取的圖表微調移動 1 px" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Shift + 方向鍵", desc: "將選取的圖表快速移動 10 px" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Ctrl + Shift + 方向鍵", desc: "調整選取圖表的大小 (Resize)" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Alt + Shift + F11", desc: "將焦點移至選取圖表的移動把手或選項按鈕" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Esc", desc: "清除目前選取狀態 / 退出鑽取模式" },
+        { cat: "畫布與圖表物件操作 (Report Canvas & Visuals)", key: "Delete", desc: "刪除選取的圖表或元件" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Shift + Enter", desc: "換行（不直接儲存/套用公式）" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + Space", desc: "強制觸發 Auto-complete 智慧提示" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + /", desc: "單行註解 / 取消註解 (//)" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Shift + Alt + A", desc: "區塊註解 / 取消區塊註解 (/* ... */)" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Alt + Up / Down", desc: "將當前行上移 / 下移一行" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Shift + Alt + Up / Down", desc: "向上 / 向下複製當前行" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + Shift + K", desc: "刪除整行程式碼" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + Alt + Up / Down", desc: "插入上方 / 下方多重游標 (Multi-cursor)" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + D", desc: "選取下一個相同的詞彙（批量修改）" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + F", desc: "搜尋" },
+        { cat: "DAX 公式編輯器 (DAX Editor)", key: "Ctrl + H", desc: "搜尋並替換" },
+        { cat: "視窗與面板導覽 (Navigation & Panes)", key: "Ctrl + F6", desc: "在主要的視窗區域間循環切換" },
+        { cat: "視窗與面板導覽 (Navigation & Panes)", key: "F2", desc: "重新命名選取的圖表標題、資料表名稱或欄位名稱" },
+        { cat: "視窗與面板導覽 (Navigation & Panes)", key: "Shift + ?", desc: "召喚 Power BI Desktop 官方快捷鍵輔助視窗" },
+        { cat: "視窗與面板導覽 (Navigation & Panes)", key: "Alt + F4", desc: "關閉 Power BI Desktop" },
+        { cat: "Power Query 編輯器 (Power Query Editor)", key: "Alt + Shift + P", desc: "顯示 / 隱藏套用的步驟 (Applied Steps) 面板" },
+        { cat: "Power Query 編輯器 (Power Query Editor)", key: "Ctrl + Shift + M", desc: "開啟進階編輯器 (Advanced Editor)" },
+        { cat: "Power Query 編輯器 (Power Query Editor)", key: "F2", desc: "重新命名目前選取的步驟或查詢資料表" },
+        { cat: "Power Query 編輯器 (Power Query Editor)", key: "Delete", desc: "刪除選取的套用步驟或資料行" }
+    ];
+
+    const grid = document.getElementById('shortcutGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filters = document.querySelectorAll('.category-badge');
+
+    function render(filterText = '', filterCat = 'all') {
+        grid.innerHTML = '';
+        const filtered = shortcuts.filter(s => {
+            const matchesSearch = s.key.toLowerCase().includes(filterText.toLowerCase()) || 
+                                 s.desc.toLowerCase().includes(filterText.toLowerCase()) ||
+                                 s.cat.toLowerCase().includes(filterText.toLowerCase());
+            const matchesCat = filterCat === 'all' || s.cat.includes(filterCat);
+            return matchesSearch && matchesCat;
+        });
+
+        filtered.forEach(s => {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4';
+            col.innerHTML = `
+                <div class="card shortcut-card shadow-sm">
+                    <div class="card-body">
+                        <div class="category-tag mb-2">${s.cat}</div>
+                        <h5 class="card-title mb-3"><span class="key-combo">${s.key}</span></h5>
+                        <p class="card-text text-dark">${s.desc}</p>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(col);
+        });
+
+        if(filtered.length === 0) {
+            grid.innerHTML = '<div class="col-12 text-center py-5 text-muted">找不到符合條件的快捷鍵</div>';
+        }
+    }
+
+    // 搜尋事件
+    searchInput.addEventListener('input', (e) => {
+        render(e.target.value);
+    });
+
+    // 分類點擊事件
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filters.forEach(b => b.classList.replace('bg-dark', 'bg-secondary'));
+            btn.classList.replace('bg-secondary', 'bg-dark');
+            render(searchInput.value, btn.dataset.filter);
+        });
+    });
+
+    // 初始渲染
+    render();
+</script>
+
+</body>
+</html>
