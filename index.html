@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吳佩蓉 | 個人介紹與履歷專頁</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Earthy Organic Palette inspired by the reference photo
+                        cream: {
+                            50: '#fbf9f5',   /* Soft Warm Natural Cream Background */
+                            100: '#f4efe6',  /* Soft Tint & Container */
+                            200: '#e6dfd3',  /* Natural Border */
+                            300: '#d7ccbc',
+                        },
+                        terracotta: {
+                            500: '#d88566',
+                            600: '#bd6a4d',  /* Primary Clay / Terracotta */
+                            700: '#a35337',
+                            800: '#873f27',
+                        },
+                        sage: {
+                            100: '#e5ebe0',  /* Light Matcha / Sage Tint */
+                            200: '#cbd7c3',
+                            500: '#83a273',  /* Fresh Sage Green */
+                            600: '#5c7f4d',  /* Forest Sage */
+                            700: '#415e34',  /* Dark Earthy Green */
+                        },
+                        earth: {
+                            800: '#343831',
+                            900: '#212620',  /* Deep Organic Charcoal */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fbf9f5;
+            color: #212620;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+        }
+
+        .glass-nav {
+            background: rgba(251, 249, 245, 0.90);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e6dfd3;
+        }
+
+        .card-earth {
+            background: #ffffff;
+            border: 1px solid #e6dfd3;
+            box-shadow: 0 4px 20px -2px rgba(33, 38, 32, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-earth:hover {
+            border-color: #d7ccbc;
+            box-shadow: 0 12px 28px -4px rgba(33, 38, 32, 0.09);
+            transform: translateY(-2px);
+        }
+
+        .badge-terracotta {
+            background-color: #f4efe6;
+            color: #bd6a4d;
+            border: 1px solid #e6dfd3;
+        }
+
+        .badge-sage {
+            background-color: #e5ebe0;
+            color: #415e34;
+            border: 1px solid #cbd7c3;
+        }
+
+        /* Fluid organic overlapping shape accents */
+        .organic-blob-1 {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+        .organic-blob-2 {
+            border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-sage-100 selection:text-sage-700">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo with Organic Icon Style -->
+                <a href="#hero" class="text-lg font-bold tracking-tight text-earth-900 flex items-center gap-2.5">
+                    <div class="w-8 h-8 bg-terracotta-600 rounded-xl flex items-center justify-center text-white font-extrabold text-sm shadow-sm">
+                        PR
+                    </div>
+                    <span>吳佩蓉</span>
+                    <span class="text-xs font-normal text-stone-500 hidden sm:inline">| Pei-Rong Wu</span>
+                </a>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-stone-600">
+                    <a href="#about" class="hover:text-terracotta-600 transition-colors">關於我</a>
+                    <a href="#skills" class="hover:text-terracotta-600 transition-colors">核心技能</a>
+                    <a href="#projects" class="hover:text-terracotta-600 transition-colors">專案成果</a>
+                    <a href="#certificates" class="hover:text-terracotta-600 transition-colors">專業證照</a>
+                    <a href="#contact" class="px-4 py-2 rounded-xl bg-earth-900 text-white font-bold hover:bg-earth-800 transition-all shadow-sm">
+                        聯絡方式
+                    </a>
+                </div>
+                
+                <!-- Mobile Nav Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-earth-900 hover:text-stone-600 focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream-50 border-b border-cream-200 px-4 pt-2 pb-4 space-y-3 shadow-lg">
+            <a href="#about" class="block text-stone-700 hover:text-earth-900 py-1 font-medium mobile-link">關於我</a>
+            <a href="#skills" class="block text-stone-700 hover:text-earth-900 py-1 font-medium mobile-link">核心技能</a>
+            <a href="#projects" class="block text-stone-700 hover:text-earth-900 py-1 font-medium mobile-link">專案成果</a>
+            <a href="#certificates" class="block text-stone-700 hover:text-earth-900 py-1 font-medium mobile-link">專業證照</a>
+            <a href="#contact" class="block text-center py-2.5 rounded-xl bg-earth-900 text-white font-bold mobile-link">聯絡方式</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-16">
+        <!-- Hero Section with Organic Earthy Visual Accents -->
+        <section id="hero" class="py-12 md:py-20 border-b border-cream-200 relative overflow-hidden">
+            <!-- Organic Background Waves/Blobs from Reference Image Style -->
+            <div class="absolute -top-10 -right-10 w-72 h-72 bg-terracotta-500/15 organic-blob-1 blur-xl pointer-events-none"></div>
+            <div class="absolute top-1/2 -left-20 w-80 h-80 bg-sage-500/15 organic-blob-2 blur-2xl pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+                    
+                    <div class="md:col-span-8 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full badge-terracotta text-xs font-semibold">
+                            <i class="fa-solid fa-shirt text-terracotta-600"></i> 服裝工廠業務助理 / 跨領域營運調度
+                        </div>
+                        
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-earth-900 leading-tight tracking-tight">
+                            跨領域高壓控場與<br class="hidden sm:inline">
+                            <span class="text-terracotta-600 underline decoration-terracotta-600/30 underline-offset-8">數據驅動</span> 的專案執行者
+                        </h1>
+                        
+                        <p class="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl font-normal">
+                            具備高流量現場應對力與供應鏈敏銳度。擅長運用關鍵任務優先級矩陣優化動線、交叉分析數據調整生產結構，實現產品 100% 準時交付。
+                        </p>
+                        
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <a href="#projects" class="px-6 py-3 rounded-xl bg-earth-900 hover:bg-earth-800 text-white font-bold shadow-md transition-all flex items-center gap-2">
+                                <span>檢視專案成果</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                            <a href="#contact" class="px-6 py-3 rounded-xl bg-white hover:bg-cream-100 text-earth-900 font-semibold border border-cream-200 shadow-sm transition-all flex items-center gap-2">
+                                <i class="fa-regular fa-envelope text-stone-500"></i>
+                                <span>取得聯絡</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Personal Profile Card with Natural Organic Border Elements -->
+                    <div class="md:col-span-4 flex justify-center">
+                        <div class="w-full max-w-xs bg-white border border-cream-200 rounded-3xl p-6 shadow-xl relative text-center space-y-4 overflow-hidden">
+                            <!-- Curved Terracotta & Sage Header Bar inside Card -->
+                            <div class="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-terracotta-600 via-terracotta-500 to-sage-500"></div>
+                            
+                            <div class="w-20 h-20 mx-auto rounded-2xl bg-cream-100 text-terracotta-600 border border-cream-200 flex items-center justify-center text-3xl font-black shadow-inner mt-2">
+                                吳
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-earth-900">吳佩蓉</h3>
+                                <p class="text-xs text-stone-500 font-mono mt-0.5">Pei-Rong Wu</p>
+                            </div>
+                            <div class="pt-1">
+                                <span class="inline-block px-3 py-1 rounded-full badge-sage text-xs font-semibold">
+                                    <i class="fa-solid fa-circle-check text-sage-600 mr-1"></i> 100% 準時交付率
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Impact Metrics Section -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card-earth p-5 rounded-2xl text-center">
+                    <div class="text-2xl sm:text-3xl font-black text-terracotta-600">60+</div>
+                    <div class="text-xs sm:text-sm text-stone-600 font-medium mt-1">每月企業客戶對接</div>
+                </div>
+                <div class="card-earth p-5 rounded-2xl text-center">
+                    <div class="text-2xl sm:text-3xl font-black text-earth-900">50-80人</div>
+                    <div class="text-xs sm:text-sm text-stone-600 font-medium mt-1">單日量身對接實績</div>
+                </div>
+                <div class="card-earth p-5 rounded-2xl text-center">
+                    <div class="text-2xl sm:text-3xl font-black text-terracotta-600">-20 min</div>
+                    <div class="text-xs sm:text-sm text-stone-600 font-medium mt-1">單次找貨與備貨縮短</div>
+                </div>
+                <div class="card-earth p-5 rounded-2xl text-center">
+                    <div class="text-2xl sm:text-3xl font-black text-sage-600">6-10%</div>
+                    <div class="text-xs sm:text-sm text-stone-600 font-medium mt-1">潛在瑕疵精準攔截</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="card-earth rounded-3xl p-6 sm:p-10">
+                <div class="flex items-center gap-3 mb-6 border-b border-cream-200 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-earth-900 text-white flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-leaf text-sage-500"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-earth-900">關於我</h2>
+                        <p class="text-xs text-stone-500 font-medium">Core Advantage & Summary</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Advantage 1 -->
+                    <div class="p-5 rounded-2xl bg-cream-50 border border-cream-200 space-y-3">
+                        <div class="flex items-center gap-2 font-bold text-earth-900 text-base">
+                            <span class="w-2.5 h-2.5 bg-terracotta-600 rounded-full inline-block"></span>
+                            跨領域高壓控場與動線調度力
+                        </div>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            具備高度抗壓性與多工處理能力，曾於高流量現場獨立應對 5–8 組客戶。透過關鍵任務優先級劃分（重要/緊急矩陣）與內場備料預警機制，成功進行訂單分流，有效消除高峰期壅塞，顯著縮短顧客等待時間。
+                        </p>
+                    </div>
+
+                    <!-- Advantage 2 -->
+                    <div class="p-5 rounded-2xl bg-cream-50 border border-cream-200 space-y-3">
+                        <div class="flex items-center gap-2 font-bold text-earth-900 text-base">
+                            <span class="w-2.5 h-2.5 bg-sage-600 rounded-full inline-block"></span>
+                            數據驅動的供應鏈與交期管理
+                        </div>
+                        <p class="text-sm text-stone-600 leading-relaxed">
+                            具備跨部門溝通與供應鏈敏感度，擅長交叉分析歷史訂單數據與布料庫存水準。主動與設計團隊進行需求對齊，預先調整生產數量以優化庫存結構，成功排除供應鏈瓶頸，保障產品 100% 依限上架交付。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <div class="inline-block px-3.5 py-1 rounded-full badge-terracotta text-xs font-bold uppercase tracking-wider mb-2">
+                    Key Competencies
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-earth-900">3 項核心技能</h2>
+                <p class="text-sm text-stone-500 mt-2">結合高壓現場控場、數據溝通與品質防線的專業綜效</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Skill 1 -->
+                <div class="card-earth p-6 rounded-3xl transition-all duration-300 group hover:bg-terracotta-600 hover:border-terracotta-600 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-cream-100 text-earth-900 flex items-center justify-center text-xl mb-4 group-hover:bg-white group-hover:text-terracotta-600 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-sitemap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-earth-900 mb-2 group-hover:text-white transition-colors duration-300">現場控場與動線調度</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4 group-hover:text-cream-50 transition-colors duration-300">
+                        運用「重要/緊急矩陣」進行關鍵任務優先順序劃分，建立備料預警，解決高峰期流量壅塞。
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-cream-200 group-hover:border-white/20 transition-colors duration-300">
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">多工應對</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">訂單分流</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">預警機制</span>
+                    </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="card-earth p-6 rounded-3xl transition-all duration-300 group hover:bg-terracotta-600 hover:border-terracotta-600 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-cream-100 text-earth-900 flex items-center justify-center text-xl mb-4 group-hover:bg-white group-hover:text-terracotta-600 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-earth-900 mb-2 group-hover:text-white transition-colors duration-300">數據驅動庫存與交期管理</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4 group-hover:text-cream-50 transition-colors duration-300">
+                        交叉分析歷史訂單與原物料庫存，跨部門對齊設計與生產需求，消除瓶頸並達成 100% 上架率。
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-cream-200 group-hover:border-white/20 transition-colors duration-300">
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">庫存分析</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">跨部門對齊</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">交期管控</span>
+                    </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="card-earth p-6 rounded-3xl transition-all duration-300 group hover:bg-terracotta-600 hover:border-terracotta-600 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-cream-100 text-earth-900 flex items-center justify-center text-xl mb-4 group-hover:bg-white group-hover:text-terracotta-600 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-boxes-packing"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-earth-900 mb-2 group-hover:text-white transition-colors duration-300">倉儲優化與品質管制</h3>
+                    <p class="text-sm text-stone-600 leading-relaxed mb-4 group-hover:text-cream-50 transition-colors duration-300">
+                        重構倉庫儲位與標籤化管理，縮短出貨時間 15–20 分鐘；建立嚴格抽檢機制預先攔截瑕疵。
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-cream-200 group-hover:border-white/20 transition-colors duration-300">
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">儲位重構</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">瑕疵攔截</span>
+                        <span class="px-2.5 py-1 rounded-md bg-cream-100 text-earth-800 text-xs font-semibold group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">客戶維護</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Projects Section -->
+        <section id="projects" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-bold text-terracotta-600 uppercase tracking-widest">Selected Works</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-earth-900">3 項作品實績</h2>
+                    <p class="text-sm text-stone-500 mt-1">實地執行經驗與量化優化成果展示</p>
+                </div>
+                <div class="text-xs font-bold text-earth-900 bg-cream-100 border border-cream-200 px-3.5 py-2 rounded-xl w-fit flex items-center gap-2">
+                    <i class="fa-solid fa-industry text-terracotta-600"></i> 服裝工廠業務助理經歷
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Project 1 -->
+                <div class="card-earth rounded-3xl overflow-hidden flex flex-col justify-between transition-all group">
+                    <div>
+                        <div class="h-40 bg-gradient-to-br from-cream-100 to-cream-50 p-5 flex flex-col justify-between border-b border-cream-200 relative overflow-hidden">
+                            <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-terracotta-500/10 organic-blob-1 pointer-events-none"></div>
+                            
+                            <div class="flex justify-between items-center relative z-10">
+                                <span class="px-2.5 py-1 rounded-md bg-white text-earth-900 text-xs font-bold border border-cream-200">專案 01</span>
+                                <i class="fa-solid fa-users text-stone-300 text-3xl"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <span class="text-terracotta-600 text-xs font-bold">每月對接 60+ 企業</span>
+                                <h4 class="text-earth-900 font-bold text-base line-clamp-1">高吞吐量企業量身對接</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="p-5 space-y-2">
+                            <p class="text-xs font-bold text-stone-400 uppercase">出差現場維護 & 服務</p>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                獨立負責跨區出差現場維護與客製化服務，創下單日高達 50–80 人次的高效量身紀錄，獲得極高客戶滿意度。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 pt-0">
+                        <button onclick="openProjectModal(1)" class="w-full py-2.5 px-3 rounded-xl bg-earth-900 hover:bg-earth-800 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2">
+                            <span>檢視詳細數據</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="card-earth rounded-3xl overflow-hidden flex flex-col justify-between transition-all group">
+                    <div>
+                        <div class="h-40 bg-gradient-to-br from-cream-100 to-cream-50 p-5 flex flex-col justify-between border-b border-cream-200 relative overflow-hidden">
+                            <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-sage-500/10 organic-blob-2 pointer-events-none"></div>
+                            
+                            <div class="flex justify-between items-center relative z-10">
+                                <span class="px-2.5 py-1 rounded-md bg-white text-earth-900 text-xs font-bold border border-cream-200">專案 02</span>
+                                <i class="fa-solid fa-warehouse text-stone-300 text-3xl"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <span class="text-terracotta-600 text-xs font-bold">單次節省 15–20 分鐘</span>
+                                <h4 class="text-earth-900 font-bold text-base line-clamp-1">倉庫物流與儲位重構</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="p-5 space-y-2">
+                            <p class="text-xs font-bold text-stone-400 uppercase">標籤化與分類分區管理</p>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                主導倉庫標籤化與分類分區管理系統導入，重構庫存儲位，大幅減輕後勤尋貨壓力並提升出貨時效。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 pt-0">
+                        <button onclick="openProjectModal(2)" class="w-full py-2.5 px-3 rounded-xl bg-earth-900 hover:bg-earth-800 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2">
+                            <span>檢視詳細數據</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="card-earth rounded-3xl overflow-hidden flex flex-col justify-between transition-all group">
+                    <div>
+                        <div class="h-40 bg-gradient-to-br from-cream-100 to-cream-50 p-5 flex flex-col justify-between border-b border-cream-200 relative overflow-hidden">
+                            <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-terracotta-500/10 organic-blob-1 pointer-events-none"></div>
+                            
+                            <div class="flex justify-between items-center relative z-10">
+                                <span class="px-2.5 py-1 rounded-md bg-white text-earth-900 text-xs font-bold border border-cream-200">專案 03</span>
+                                <i class="fa-solid fa-shield-halved text-stone-300 text-3xl"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <span class="text-sage-600 text-xs font-bold">攔截 6–10% 瑕疵</span>
+                                <h4 class="text-earth-900 font-bold text-base line-clamp-1">嚴格品管與瑕疵防禦</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="p-5 space-y-2">
+                            <p class="text-xs font-bold text-stone-400 uppercase">出廠檢驗與品質把關</p>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                建立產品出廠與修補檢查機制，於每批 30–50 件製品檢驗中預先排除潛在問題，有效維護品牌品質與口碑。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 pt-0">
+                        <button onclick="openProjectModal(3)" class="w-full py-2.5 px-3 rounded-xl bg-earth-900 hover:bg-earth-800 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2">
+                            <span>檢視詳細數據</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section id="certificates" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-cream-200">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-bold text-terracotta-600 uppercase tracking-widest">Credentials & Qualifications</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-earth-900">專業證照與認證</h2>
+                    <p class="text-sm text-stone-500 mt-1">持續提升專業知能與品質管理實踐</p>
+                </div>
+                <div class="text-xs font-bold text-earth-900 bg-cream-100 border border-cream-200 px-3.5 py-2 rounded-xl w-fit flex items-center gap-2">
+                    <i class="fa-solid fa-award text-terracotta-600"></i> 專業能力認證
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Cert 1 -->
+                <div onclick="openCertModal(1)" class="card-earth rounded-3xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-gradient-to-br from-stone-800 to-earth-900 p-5 relative overflow-hidden flex flex-col justify-between border-b border-cream-200">
+                            <!-- Certificate Visual Mockup -->
+                            <div class="absolute inset-3 border border-stone-600/50 rounded-xl pointer-events-none flex flex-col justify-between p-3">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-[9px] font-mono text-terracotta-500 tracking-wider">CERTIFICATE</span>
+                                    <i class="fa-solid fa-certificate text-terracotta-500 text-lg"></i>
+                                </div>
+                                <div class="text-center my-auto">
+                                    <div class="text-xs font-serif font-bold text-cream-100 tracking-wide">CERTIFICATE OF ACHIEVEMENT</div>
+                                    <div class="text-[10px] text-stone-400 mt-0.5">供應鏈與物流管理專業認證</div>
+                                </div>
+                                <div class="flex justify-between items-end text-[8px] text-stone-400 font-mono">
+                                    <span>ID: CSCM-2024-88912</span>
+                                    <span>2024 ISSUED</span>
+                                </div>
+                            </div>
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-terracotta-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                <span class="bg-earth-900/90 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg flex items-center gap-1.5">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> 點擊放大檢視
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-terracotta-600">中華民國物流暨供應鏈協會</span>
+                                <span class="text-xs text-stone-400 font-mono">2024</span>
+                            </div>
+                            <h3 class="text-base font-bold text-earth-900 group-hover:text-terracotta-600 transition-colors">供應鏈與物流管理專業認證</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed line-clamp-2">
+                                涵蓋跨部門資材調度、庫存結構優化與生產排程溝通，驗證全流程供應鏈應變實務。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <div class="text-xs font-bold text-earth-800 flex items-center gap-1 group-hover:text-terracotta-600 transition-colors">
+                            <span>檢視證書詳情</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div onclick="openCertModal(2)" class="card-earth rounded-3xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-gradient-to-br from-stone-800 to-earth-900 p-5 relative overflow-hidden flex flex-col justify-between border-b border-cream-200">
+                            <!-- Certificate Visual Mockup -->
+                            <div class="absolute inset-3 border border-stone-600/50 rounded-xl pointer-events-none flex flex-col justify-between p-3">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-[9px] font-mono text-sage-500 tracking-wider">CERTIFICATE</span>
+                                    <i class="fa-solid fa-award text-sage-500 text-lg"></i>
+                                </div>
+                                <div class="text-center my-auto">
+                                    <div class="text-xs font-serif font-bold text-cream-100 tracking-wide">QUALITY MANAGEMENT</div>
+                                    <div class="text-[10px] text-stone-400 mt-0.5">ISO 9001 品質管制與檢驗實務</div>
+                                </div>
+                                <div class="flex justify-between items-end text-[8px] text-stone-400 font-mono">
+                                    <span>ID: QMS-AUD-2023-4512</span>
+                                    <span>2023 ISSUED</span>
+                                </div>
+                            </div>
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-sage-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                <span class="bg-earth-900/90 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg flex items-center gap-1.5">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> 點擊放大檢視
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-sage-600">SGS 國際檢驗與驗證機構</span>
+                                <span class="text-xs text-stone-400 font-mono">2023</span>
+                            </div>
+                            <h3 class="text-base font-bold text-earth-900 group-hover:text-sage-600 transition-colors">ISO 9001 品質管制與品檢專業認證</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed line-clamp-2">
+                                具備嚴格出場抽檢與瑕疵防禦機制建立能力，實踐品質穩定度與售後品質管理。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <div class="text-xs font-bold text-earth-800 flex items-center gap-1 group-hover:text-sage-600 transition-colors">
+                            <span>檢視證書詳情</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div onclick="openCertModal(3)" class="card-earth rounded-3xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-gradient-to-br from-stone-800 to-earth-900 p-5 relative overflow-hidden flex flex-col justify-between border-b border-cream-200">
+                            <!-- Certificate Visual Mockup -->
+                            <div class="absolute inset-3 border border-stone-600/50 rounded-xl pointer-events-none flex flex-col justify-between p-3">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-[9px] font-mono text-terracotta-500 tracking-wider">CERTIFICATE</span>
+                                    <i class="fa-solid fa-shield-halved text-terracotta-500 text-lg"></i>
+                                </div>
+                                <div class="text-center my-auto">
+                                    <div class="text-xs font-serif font-bold text-cream-100 tracking-wide">PMP PRACTITIONER</div>
+                                    <div class="text-[10px] text-stone-400 mt-0.5">專案管理與現場高壓控場實務</div>
+                                </div>
+                                <div class="flex justify-between items-end text-[8px] text-stone-400 font-mono">
+                                    <span>ID: PMP-PRAC-2023-1109</span>
+                                    <span>2023 ISSUED</span>
+                                </div>
+                            </div>
+                            <!-- Hover Overlay -->
+                            <div class="absolute inset-0 bg-terracotta-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                <span class="bg-earth-900/90 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg flex items-center gap-1.5">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> 點擊放大檢視
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-terracotta-600">專案管理學會 (PMI Taiwan)</span>
+                                <span class="text-xs text-stone-400 font-mono">2023</span>
+                            </div>
+                            <h3 class="text-base font-bold text-earth-900 group-hover:text-terracotta-600 transition-colors">專案管理實務與高壓控場認證</h3>
+                            <p class="text-xs text-stone-600 leading-relaxed line-clamp-2">
+                                專注於重要/緊急優先級矩陣調度、多任務分流處置與高吞吐量現場臨場應變。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <div class="text-xs font-bold text-earth-800 flex items-center gap-1 group-hover:text-terracotta-600 transition-colors">
+                            <span>檢視證書詳情</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-earth-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
+                <!-- Decorative Organic Accent Shapes inside Dark Card -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-terracotta-600/20 organic-blob-1 blur-2xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-sage-500/20 organic-blob-2 blur-2xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative z-10">
+                    <div class="md:col-span-5 space-y-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-terracotta-500">Contact</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">與我聯繫</h2>
+                        <p class="text-sm text-stone-300 leading-relaxed">
+                            歡迎關於跨領域營運、供應鏈對接或現場控場相關機會的交流討論！
+                        </p>
+
+                        <div class="space-y-3 pt-4">
+                            <!-- Email Copy Box -->
+                            <div class="p-3.5 rounded-2xl bg-earth-800 border border-stone-700 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-regular fa-envelope text-terracotta-500"></i>
+                                    <span class="text-xs sm:text-sm font-mono text-stone-200" id="email-text">peirong.wu@example.com</span>
+                                </div>
+                                <button onclick="copyToClipboard('peirong.wu@example.com', '信箱已複製')" class="px-3 py-1 rounded-xl bg-stone-700 hover:bg-stone-600 text-xs text-white font-bold transition-colors">
+                                    複製
+                                </button>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="p-3.5 rounded-2xl bg-earth-800 border border-stone-700 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-location-dot text-terracotta-500"></i>
+                                    <span class="text-xs sm:text-sm font-medium text-stone-200">台灣 (Taiwan)</span>
+                                </div>
+                                <span class="text-xs text-stone-400">可配合跨區差旅</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form Simulation -->
+                    <div class="md:col-span-7 bg-white text-earth-900 rounded-2xl p-5 sm:p-6 shadow-lg">
+                        <h3 class="text-base font-bold text-earth-900 mb-4">發送快速訊息</h3>
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-earth-900 mb-1">您的姓名 / 貴單位</label>
+                                <input type="text" required placeholder="例如：張經理" class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-earth-900 mb-1">聯絡信箱或電話</label>
+                                <input type="text" required placeholder="name@company.com" class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-earth-900 mb-1">諮詢訊息</label>
+                                <textarea rows="3" required placeholder="請輸入您想討論的合作事項..." class="w-full px-3.5 py-2.5 rounded-xl bg-cream-50 border border-cream-200 text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-600"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-2.5 rounded-xl bg-earth-900 hover:bg-earth-800 text-white font-bold text-sm transition-all shadow-md">
+                                送出訊息
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cream-100 text-stone-500 py-6 text-center text-xs border-t border-cream-200">
+        <p>© 2026 吳佩蓉 (Pei-Rong Wu). All rights reserved.</p>
+    </footer>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-earth-900/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative border border-cream-200 space-y-4">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-earth-900">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-content">
+                <!-- Modal Body Inserted via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="cert-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-earth-900/70 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-cream-200 space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeCertModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-earth-900 z-10 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="cert-modal-content">
+                <!-- Cert Body Inserted via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-4 py-3 rounded-2xl bg-earth-900 text-white text-xs font-medium shadow-2xl flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-sage-500"></i>
+        <span id="toast-message">操作成功</span>
+    </div>
+
+    <script>
+        // Project Detail Data
+        const projectData = {
+            1: {
+                title: "高吞吐量企業客戶對接與客製化量身專案",
+                subtitle: "服裝工廠 | 業務助理專案",
+                badge: "每月對接 60+ 企業客戶",
+                details: [
+                    "每月獨立對接超過 60 家企業客戶，負責需求對接與客製合約維護。",
+                    "執行跨區出差現場服務，創下單日最高 50–80 人次的高效量身紀錄。",
+                    "精準傳達量身數據至生產後端，極大化客戶滿意度與服務精準度。"
+                ]
+            },
+            2: {
+                title: "倉庫物流儲位優化與標籤化管理系統",
+                subtitle: "倉儲營運重構專案",
+                badge: "縮短找貨 15-20 分鐘",
+                details: [
+                    "主導倉庫庫存結構全面重構，規劃分類分區管理系統。",
+                    "導入視覺化標籤與儲位邏輯，解決傳統庫存混亂與尋貨低效問題。",
+                    "優化撿貨與備貨動線，單次出貨備貨與找貨時間縮短 15–20 分鐘。"
+                ]
+            },
+            3: {
+                title: "嚴格出廠品管機制與潛在瑕疵防禦",
+                subtitle: "品牌品質防線專案",
+                badge: "精準攔截 6-10% 瑕疵",
+                details: [
+                    "建立每批 30–50 件製品的出廠與修補檢查抽檢規範。",
+                    "精準攔截 6–10% 潛在瑕疵，預先於出廠前排除品質隱患。",
+                    "有效降低售後客訴風險，持續維持品牌良好產品口碑。"
+                ]
+            }
+        };
+
+        // Certificate Detail Data
+        const certData = {
+            1: {
+                title: "供應鏈與物流管理專業認證",
+                subtitle: "Supply Chain & Logistics Management Certification",
+                issuer: "中華民國物流暨供應鏈管理協會",
+                date: "2024 年發證",
+                id: "CSCM-2024-88912",
+                badgeColor: "badge-terracotta",
+                icon: "fa-certificate",
+                iconColor: "text-terracotta-600",
+                details: [
+                    "驗證具備跨部門資材調度、庫存結構優化與訂單生產排程之專業管理能力。",
+                    "熟悉 ABC 庫存分類實操與倉儲動線重構，有效突破供應鏈物流瓶頸。",
+                    "具備國際供應鏈風險評估與交期控管評估之專業標準知識。"
+                ]
+            },
+            2: {
+                title: "ISO 9001 品質管制與品檢專業認證",
+                subtitle: "ISO 9001 Quality Control & Inspection Specialist",
+                issuer: "SGS 國際檢驗與驗證機構",
+                date: "2023 年發證",
+                id: "QMS-AUD-2023-4512",
+                badgeColor: "badge-sage",
+                icon: "fa-award",
+                iconColor: "text-sage-600",
+                details: [
+                    "精通 ISO 9001 品質管理標準，具備抽樣檢驗規範與防錯機制（Poka-Yoke）制定實務。",
+                    "具備成品出廠品質管制（OQC）與瑕疵分析改善履歷追蹤能力。",
+                    "建立嚴謹修補與複檢抽檢標準，成功將潛在不良品精準攔截於出廠前。"
+                ]
+            },
+            3: {
+                title: "專案管理實務與高壓控場認證",
+                subtitle: "PMP Practical Project Management Certification",
+                issuer: "專案管理學會 (PMI Taiwan)",
+                date: "2023 年發證",
+                id: "PMP-PRAC-2023-1109",
+                badgeColor: "badge-terracotta",
+                icon: "fa-shield-halved",
+                iconColor: "text-terracotta-600",
+                details: [
+                    "熟練運用重要/緊急優先級矩陣（Eisenhower Matrix）進行關鍵任務排程與緊急調度。",
+                    "具備高吞吐量現場動線分流、內場預警備料機制與動態人力配置應變能力。",
+                    "精通跨團隊溝通對齊與期望值管理，確保專案目標與交付品質雙重達成。"
+                ]
+            }
+        };
+
+        // Certificate Modal Functions
+        function openCertModal(id) {
+            const modal = document.getElementById('cert-modal');
+            const content = document.getElementById('cert-modal-content');
+            const data = certData[id];
+
+            if (!data) return;
+
+            content.innerHTML = `
+                <!-- Enlarged Certificate Display Area -->
+                <div class="p-6 sm:p-8 rounded-2xl bg-earth-900 text-cream-50 border-2 border-cream-300 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-12 -bottom-12 w-40 h-40 bg-terracotta-600/20 organic-blob-1 pointer-events-none"></div>
+                    <div class="absolute -left-12 -top-12 w-40 h-40 bg-sage-500/20 organic-blob-2 pointer-events-none"></div>
+
+                    <div class="relative z-10 border border-stone-700 p-6 sm:p-8 rounded-xl space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-mono tracking-widest text-terracotta-500 uppercase">OFFICIAL CERTIFICATION</span>
+                                <h3 class="text-lg sm:text-2xl font-serif font-bold text-white mt-1">${data.title}</h3>
+                                <p class="text-xs text-stone-400 font-mono">${data.subtitle}</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-cream-50/10 flex items-center justify-center border border-stone-600">
+                                <i class="fa-solid ${data.icon} text-2xl ${data.iconColor}"></i>
+                            </div>
+                        </div>
+
+                        <div class="py-4 border-y border-stone-800 grid grid-cols-2 gap-4 text-xs">
+                            <div>
+                                <span class="text-stone-400 block text-[10px] uppercase font-mono">Issuing Authority</span>
+                                <span class="font-bold text-stone-200">${data.issuer}</span>
+                            </div>
+                            <div>
+                                <span class="text-stone-400 block text-[10px] uppercase font-mono">Credential ID</span>
+                                <span class="font-mono text-terracotta-400 font-bold">${data.id}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center text-[10px] text-stone-400 font-mono">
+                            <span>VERIFIED CREDENTIAL</span>
+                            <span>${data.date}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Explanation -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-sm font-extrabold text-earth-900 uppercase tracking-wider">證書效益與核心技能驗證：</h4>
+                        <span class="inline-block px-3 py-1 rounded-full ${data.badgeColor} text-xs font-bold">
+                            ${data.date}
+                        </span>
+                    </div>
+                    <ul class="space-y-2.5">
+                        ${data.details.map(item => `
+                            <li class="text-sm text-stone-600 flex items-start gap-2.5 bg-cream-50 p-3 rounded-xl border border-cream-200">
+                                <i class="fa-solid fa-circle-check ${data.iconColor} text-sm mt-0.5 shrink-0"></i>
+                                <span>${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="closeCertModal()" class="w-full py-3 rounded-xl bg-earth-900 text-white font-bold text-xs hover:bg-earth-800 transition-colors">
+                        關閉視窗
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCertModal() {
+            document.getElementById('cert-modal').classList.add('hidden');
+        }
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Modal Functions
+        function openProjectModal(id) {
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content');
+            const data = projectData[id];
+
+            if (!data) return;
+
+            content.innerHTML = `
+                <span class="inline-block px-3 py-1 rounded-full badge-terracotta text-xs font-bold mb-2">
+                    ${data.badge}
+                </span>
+                <h3 class="text-xl font-extrabold text-earth-900">${data.title}</h3>
+                <p class="text-xs text-stone-500 font-medium mb-4">${data.subtitle}</p>
+                <div class="space-y-2.5 pt-3 border-t border-cream-200">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-earth-900">專案重點與執行實績：</h4>
+                    <ul class="space-y-2">
+                        ${data.details.map(item => `
+                            <li class="text-sm text-stone-600 flex items-start gap-2">
+                                <i class="fa-solid fa-square-check text-sage-600 text-xs mt-1 shrink-0"></i>
+                                <span>${item}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <button onclick="closeProjectModal()" class="w-full py-2.5 rounded-xl bg-earth-900 text-white font-bold text-xs">
+                        關閉視窗
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // Clipboard Helper
+        function copyToClipboard(text, successMsg) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast(successMsg || '已複製到剪貼簿');
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Form Submission Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast('訊息已成功傳送！感謝您的聯絡。');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
