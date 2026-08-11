@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人化 Kanban 任務板</title>
+  
+  <!-- Google Fonts: Shippori Mincho for Headings, Noto Sans TC for Body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f5f3ee;
+      --column-bg: #edeae3;
+      --card-bg: #ffffff;
+      --text-main: #2b2b2b;
+      --text-muted: #666666;
+      --border-radius: 6px;
+      
+      /* Column Tag Colors */
+      --tag-todo: #5b7c99;        /* 霧藍色 */
+      --tag-progress: #c68b59;    /* 芥末黃/赭黃 */
+      --tag-done: #709775;        /* 鼠尾草綠 */
+      
+      /* Accent & Interactive Colors */
+      --orange-focus: #e76f51;
+      --border-color: #dcd8cf;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto 1.5rem auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    h1 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .board {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      flex: 1;
+      align-items: start;
+    }
+
+    @media (max-width: 868px) {
+      .board {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .column {
+      background-color: var(--column-bg);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 120px);
+    }
+
+    .column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .column-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .counter-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.15rem 0.6rem;
+      border-radius: var(--border-radius);
+      min-width: 24px;
+    }
+
+    .badge-todo { background-color: var(--tag-todo); }
+    .badge-progress { background-color: var(--tag-progress); }
+    .badge-done { background-color: var(--tag-done); }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      overflow-y: auto;
+      padding-right: 2px;
+      flex: 1;
+      min-height: 50px;
+    }
+
+    .task-card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 0.875rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      word-break: break-word;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .task-content {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      white-space: pre-wrap;
+    }
+
+    .task-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.35rem;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.5rem;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      color: var(--text-main);
+      padding: 0.3rem 0.55rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover {
+      background-color: #f0ece1;
+    }
+
+    .btn-delete {
+      color: #c94a29;
+      border-color: rgba(201, 74, 41, 0.2);
+      margin-left: auto;
+    }
+
+    .btn-delete:hover {
+      background-color: #fdf2f0;
+      border-color: #c94a29;
+    }
+
+    .column-footer {
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .task-input {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 0.9rem;
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .task-input:focus {
+      border-color: var(--orange-focus);
+    }
+
+    .btn-add {
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      font-weight: 500;
+      padding: 0.5rem 0.85rem;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover {
+      border-color: var(--text-main);
+      background-color: #ffffff;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 1.5rem 0;
+      border: 1px dashed var(--border-color);
+      border-radius: var(--border-radius);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>個人任務看板</h1>
+    <span class="subtitle">輕量、免安裝、資料保存在本地</span>
+  </header>
+
+  <main class="board">
+    <!-- 待辦 欄位 -->
+    <section class="column" data-status="todo">
+      <div class="column-header">
+        <h2 class="column-title">待辦</h2>
+        <span class="counter-badge badge-todo" id="count-todo">0</span>
+      </div>
+      <div class="task-list" id="list-todo"></div>
+      <div class="column-footer">
+        <input type="text" class="task-input" id="input-todo" placeholder="新增待辦事項..." onkeydown="handleKeyDown(event, 'todo')">
+        <button class="btn btn-add" onclick="addTask('todo')">新增</button>
+      </div>
+    </section>
+
+    <!-- 進行中 欄位 -->
+    <section class="column" data-status="in_progress">
+      <div class="column-header">
+        <h2 class="column-title">進行中</h2>
+        <span class="counter-badge badge-progress" id="count-in_progress">0</span>
+      </div>
+      <div class="task-list" id="list-in_progress"></div>
+      <div class="column-footer">
+        <input type="text" class="task-input" id="input-in_progress" placeholder="新增進行中事項..." onkeydown="handleKeyDown(event, 'in_progress')">
+        <button class="btn btn-add" onclick="addTask('in_progress')">新增</button>
+      </div>
+    </section>
+
+    <!-- 完成 欄位 -->
+    <section class="column" data-status="done">
+      <div class="column-header">
+        <h2 class="column-title">完成</h2>
+        <span class="counter-badge badge-done" id="count-done">0</span>
+      </div>
+      <div class="task-list" id="list-done"></div>
+      <div class="column-footer">
+        <input type="text" class="task-input" id="input-done" placeholder="新增已完成事項..." onkeydown="handleKeyDown(event, 'done')">
+        <button class="btn btn-add" onclick="addTask('done')">新增</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'kanban_board_tasks';
+    const COLUMNS = ['todo', 'in_progress', 'done'];
+
+    // 取得資料或初始化預設資料
+    function loadTasks() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error('Failed to parse tasks from localStorage', e);
+        }
+      }
+      // 預設示範資料
+      return [
+        { id: generateId(), text: '規劃本週核心目標', status: 'todo' },
+        { id: generateId(), text: '撰寫專案說明文件', status: 'in_progress' },
+        { id: generateId(), text: '設置個人任務看板範本', status: 'done' }
+      ];
+    }
+
+    let tasks = loadTasks();
+
+    function saveTasks() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    }
+
+    function generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+    }
+
+    function render() {
+      COLUMNS.forEach(status => {
+        const listEl = document.getElementById(`list-${status}`);
+        const countEl = document.getElementById(`count-${status}`);
+        const filteredTasks = tasks.filter(t => t.status === status);
+
+        // 更新計數器
+        countEl.textContent = filteredTasks.length;
+
+        // 清空列表
+        listEl.innerHTML = '';
+
+        if (filteredTasks.length === 0) {
+          const emptyEl = document.createElement('div');
+          emptyEl.className = 'empty-state';
+          emptyEl.textContent = '尚無任務';
+          listEl.appendChild(emptyEl);
+          return;
+        }
+
+        // 渲染卡片
+        filteredTasks.forEach(task => {
+          const card = document.createElement('div');
+          card.className = 'task-card';
+
+          const content = document.createElement('div');
+          content.className = 'task-content';
+          content.textContent = task.text;
+
+          const actions = document.createElement('div');
+          actions.className = 'task-actions';
+
+          // 左移按鈕 (非第一欄時顯示)
+          if (status !== 'todo') {
+            const leftBtn = document.createElement('button');
+            leftBtn.className = 'btn';
+            leftBtn.textContent = '←';
+            leftBtn.title = '向左移';
+            leftBtn.onclick = () => moveTask(task.id, -1);
+            actions.appendChild(leftBtn);
+          }
+
+          // 右移按鈕 (非最後一欄時顯示)
+          if (status !== 'done') {
+            const rightBtn = document.createElement('button');
+            rightBtn.className = 'btn';
+            rightBtn.textContent = '→';
+            rightBtn.title = '向右移';
+            rightBtn.onclick = () => moveTask(task.id, 1);
+            actions.appendChild(rightBtn);
+          }
+
+          // 刪除按鈕
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'btn btn-delete';
+          deleteBtn.textContent = '刪除';
+          deleteBtn.onclick = () => deleteTask(task.id);
+          actions.appendChild(deleteBtn);
+
+          card.appendChild(content);
+          card.appendChild(actions);
+          listEl.appendChild(card);
+        });
+      });
+    }
+
+    function addTask(status) {
+      const inputEl = document.getElementById(`input-${status}`);
+      const text = inputEl.value.trim();
+
+      if (!text) return;
+
+      tasks.push({
+        id: generateId(),
+        text: text,
+        status: status
+      });
+
+      inputEl.value = '';
+      saveTasks();
+      render();
+    }
+
+    function handleKeyDown(event, status) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        addTask(status);
+      }
+    }
+
+    function moveTask(id, direction) {
+      const task = tasks.find(t => t.id === id);
+      if (!task) return;
+
+      const currentIndex = COLUMNS.indexOf(task.status);
+      const newIndex = currentIndex + direction;
+
+      if (newIndex >= 0 && newIndex < COLUMNS.length) {
+        task.status = COLUMNS[newIndex];
+        saveTasks();
+        render();
+      }
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(t => t.id !== id);
+      saveTasks();
+      render();
+    }
+
+    // 頁面載入時進行初始化渲染
+    window.addEventListener('DOMContentLoaded', () => {
+      render();
+    });
+  </script>
+</body>
+</html>
